@@ -2,7 +2,7 @@
 Feature: Shopping Cart - Add and view Cart
 
     @Tag1
-    Scenario Outline: Add a product cart and View cart and check prices
+    Scenario: Add a product cart and View cart and check prices
 
         Given Login with Registered user "viki.vconnect@gmail.com"
         #When  The user is logged In Successfully
