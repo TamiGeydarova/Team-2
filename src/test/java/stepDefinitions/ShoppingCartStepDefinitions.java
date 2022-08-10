@@ -1,20 +1,18 @@
 package stepDefinitions;
 
-import cucumber.api.PendingException;
-import cucumber.api.java.After;
-import cucumber.api.java.Before;
+import cucumber.api.DataTable;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.How;
 import pageObjects.LoginPage;
 import pageObjects.MainPage;
 import pageObjects.ResultPage;
 import pageObjects.ShoppingCartPage;
 
+import java.util.List;
+import java.util.Map;
+
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 public class ShoppingCartStepDefinitions extends GeneralSteps{
@@ -45,5 +43,16 @@ public class ShoppingCartStepDefinitions extends GeneralSteps{
     @And("^View the shopping cart$")
     public void viewTheShoppingCart() {
         shoppingCartPage.clickShoppingCart();
+    }
+
+    @Then("^Ensure the Product features and prices on the shopping cart page$")
+    public void ensureTheProductFeaturesOnTheShoppingCartPage(DataTable table) {
+        List<Map<String, String>> data = table.asMaps(String.class, String.class);
+        assertEquals(data.get(0).get("Product Name"), shoppingCartPage.getProductNameText());
+        assertEquals(data.get(0).get("Model"), shoppingCartPage.getProductModelText());
+        assertEquals(data.get(0).get("Quantity"),shoppingCartPage.getProductQuantityText());
+        assertEquals(data.get(0).get("Unit Price"),shoppingCartPage.getProductUnitPriceText());
+        assertEquals(data.get(0).get("Total"),shoppingCartPage.getProductTotalPriceText());
+
     }
 }

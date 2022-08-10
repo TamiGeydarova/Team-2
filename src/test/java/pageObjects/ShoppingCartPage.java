@@ -31,7 +31,7 @@ public class ShoppingCartPage extends Page {
     @FindBy(xpath = "//a[text()='Show All Desktops']")
     public WebElement subCategory;
 
-    @FindBy(xpath = "//a[text()='HP LP3065']")
+    @FindBy(xpath = "//a[contains(text(),'HP LP3065')]")
     public WebElement product;
 
     @FindBy(id = "button-cart")
@@ -42,6 +42,22 @@ public class ShoppingCartPage extends Page {
 
     @FindBy(xpath= "//a[@title='Shopping Cart']")
     public WebElement shoppingCartIcon;
+
+    @FindBy(xpath= "//*[@id='content']/form/div/table/tbody/tr/td[2]/a")
+    public WebElement productName;
+
+    @FindBy(xpath= "//*[@id='content']/form/div/table/tbody/tr/td[4]/div/input")
+    public WebElement productQuantity;
+
+    @FindBy(xpath= "//*[@id='content']/form/div/table/tbody/tr/td[3]")
+    public WebElement productModel;
+
+    @FindBy(xpath= "//*[@id='content']/form/div/table/tbody/tr/td[5]")
+    public WebElement productUnitPrice;
+
+    @FindBy(xpath= "//*[@id='content']/form/div/table/tbody/tr/td[6]")
+    public WebElement productTotalPrice;
+
 
 
     public ShoppingCartPage(WebDriverLib driver) {
@@ -113,5 +129,34 @@ public class ShoppingCartPage extends Page {
         driver.waitForElementPresent(shoppingCartIcon);
         shoppingCartIcon.click();
     }
+
+    public String getProductTotalPriceText() {
+        driver.waitForElementPresent(productTotalPrice);
+        return productTotalPrice.getText();
+    }
+    public String getProductNameText() {
+        driver.waitForElementPresent(productName);
+        return productName.getText();
+    }
+    public String getProductModelText() {
+        driver.waitForElementPresent(productModel);
+        return productModel.getText();
+    }
+    public String getProductQuantityText() {
+        driver.waitForElementPresent(productQuantity);
+        return productQuantity.getAttribute("value");
+    }
+    public String getProductUnitPriceText() {
+        driver.waitForElementPresent(productUnitPrice);
+        return productUnitPrice.getText();
+    }
+
+    public String getSubCategoryText() {
+        driver.waitForElementPresent(subCategory);
+        return subCategory.getText();
+    }
+
+
+
 
 }
