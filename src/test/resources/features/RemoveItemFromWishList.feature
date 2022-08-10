@@ -9,7 +9,7 @@ Feature: User adds 1 item to the wishlist and removes it after
     And I see success message
     And I open wishlist page
     Then I click remove item from wishlist
-#    And Item is removed from wishlist
+    And Item is removed from wishlist
     And I see remove success message
 
 

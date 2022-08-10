@@ -72,7 +72,7 @@ public class WebShopPOSteps extends GeneralSteps {
 
     @And("^Item is removed from wishlist$")
     public void firstItemRemovedFromWishlist() {
-        assertFalse(webShopWishlistPagePO.appleCinemaItem.isDisplayed());
+        assertTrue(webShopWishlistPagePO.checkWishlistIsEmpty());
     }
 
     @And("^I see remove success message$")
@@ -80,9 +80,10 @@ public class WebShopPOSteps extends GeneralSteps {
         assertTrue(webShopHomePagePO.successMsg.isDisplayed());
         assertEquals("Success: You have modified your wish list!\n" +
                 "×", webShopHomePagePO.successMsg.getText());
-
-
     }
+
+
+
 
 
 

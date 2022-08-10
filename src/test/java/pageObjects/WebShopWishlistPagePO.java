@@ -19,10 +19,6 @@ public class WebShopWishlistPagePO extends Page {
     @FindBy(how = How.XPATH, using = "//*[@id=\"content\"]/h2")
     public List<WebElement> wishList;
 
-    @FindBy(how = How.XPATH, using = "//div[contains (@class, \"alert\") and contains(text(),'Success')]")
-    public WebElement removeSuccessMsg;
-
-
 
     public WebShopWishlistPagePO(WebDriverLib driver) {
         super(driver);
@@ -30,9 +26,9 @@ public class WebShopWishlistPagePO extends Page {
     }
     public boolean checkWishlistIsEmpty() {
         if(wishList.isEmpty())
-            return true;
-        else
             return false;
+        else
+            return true;
     }
 
 
