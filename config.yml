@@ -1,4 +1,0 @@
-projectConfigurations:
-  browser:
-    name: chrome
-    baseUrl: https://www.google.com/
