@@ -6,6 +6,7 @@ import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
+import org.openqa.selenium.By;
 import pageObjects.*;
 
 import java.util.Map;
@@ -18,15 +19,7 @@ public class WebShopPOSteps extends GeneralSteps {
     private WebShopLoginPagePO webShopLoginPagePO = new WebShopLoginPagePO(driver);
     private WebShopWishlistPagePO webShopWishlistPagePO = new WebShopWishlistPagePO(driver);
 
-    @Before
-    public void openBrowser() {
-        driver.openBrowser();
-    }
 
-    @After
-    public void closeBrowser() {
-        driver.close();
-    }
 
     @Given("^I am logged it to registered account$")
     public void iAmLoggedIntoRegisteredAccount() throws InterruptedException {
@@ -56,6 +49,7 @@ public class WebShopPOSteps extends GeneralSteps {
     @And("^I see success message$")
     public void iSeeSuccessMsg() {
         assertTrue(webShopHomePagePO.successMsg.isDisplayed());
+        assertEquals("Success: You have added Apple Cinema 30\" to your wish list!\n×", webShopHomePagePO.successMsg.getText());
     }
 
     @And("^I open wishlist page$")
@@ -73,14 +67,23 @@ public class WebShopPOSteps extends GeneralSteps {
 
     @Then("^I click remove item from wishlist$")
     public void iClickRemoveItemWishlist() {
-
         webShopWishlistPagePO.removeFirstItemFromWishListBtn.click();
     }
 
     @And("^Item is removed from wishlist$")
     public void firstItemRemovedFromWishlist() {
-        assertFalse(webShopWishlistPagePO.isFirstItemDisplayed());
+        assertFalse(webShopWishlistPagePO.appleCinemaItem.isDisplayed());
+    }
+
+    @And("^I see remove success message$")
+    public void iSeeRemoveSuccessMsg() {
+        assertTrue(webShopHomePagePO.successMsg.isDisplayed());
+        assertEquals("Success: You have modified your wish list!\n" +
+                "×", webShopHomePagePO.successMsg.getText());
 
 
     }
+
+
+
 }

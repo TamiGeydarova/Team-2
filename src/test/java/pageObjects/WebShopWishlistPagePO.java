@@ -19,28 +19,23 @@ public class WebShopWishlistPagePO extends Page {
     @FindBy(how = How.XPATH, using = "//*[@id=\"content\"]/h2")
     public List<WebElement> wishList;
 
+    @FindBy(how = How.XPATH, using = "//div[contains (@class, \"alert\") and contains(text(),'Success')]")
+    public WebElement removeSuccessMsg;
+
+
+
     public WebShopWishlistPagePO(WebDriverLib driver) {
         super(driver);
         PageFactory.initElements(driver, this);
     }
-    public boolean isFirstItemDisplayed() {
+    public boolean checkWishlistIsEmpty() {
         if(wishList.isEmpty())
             return true;
         else
             return false;
     }
 
-//    public boolean isElementPresent() {
-//        if (driver.findElements(By.xpath("//a[contains(text(),'Apple')]")).size() > 0) {
-//            driver.findElements(By.xpath("//a[contains(text(),'Apple')]"));
-//            if (driver.findElements(By.xpath("//a[contains(text(),'Apple')]")).isDisplayed()) {
-//                if (driver.findElements(By.xpath("//a[contains(text(),'Apple')]")).isEnabled()) {
-//                    return true;
-//                }
-//            }
-//        }
-//        return false;
-//    }
+
 
 
 }
