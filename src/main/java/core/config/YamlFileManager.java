@@ -46,4 +46,11 @@ public class YamlFileManager {
             throw new BadSetupException("Properties file [" + pathToPropsFile + "] cannot be read.", e);
         }
     }
+
+    public String getReportConfigPath(){
+        YamlConfig config = YamlFileManager.getProjectConfigurations();
+        String reportConfigPath = config.getConfiguration("reporting.reportConfigPath");
+        if(reportConfigPath!= null) return reportConfigPath;
+        else throw new RuntimeException("Report Config Path not specified in the Configuration.properties file for the Key:reportConfigPath");
+    }
 }
