@@ -10,6 +10,7 @@ import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.io.File;
 import java.util.List;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
@@ -177,6 +178,14 @@ public class WebDriverLib implements WebDriver {
 
     public TargetLocator switchTo() {
         return driver.switchTo();
+    }
+
+    public void uploadFileUsingJavaScript(WebElement element) {
+        String filename = "src/test/resources/SamplePictures/picture.png";
+        File file = new File(filename);
+        String path = file.getAbsolutePath();
+        JavascriptExecutor jsx = (JavascriptExecutor) driver;
+        jsx.executeScript("document.getElementById('input-option222').value='" + path + "';");
     }
 
 }

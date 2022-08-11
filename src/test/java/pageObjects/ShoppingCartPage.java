@@ -9,29 +9,20 @@ import org.openqa.selenium.support.How;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
 
+import java.io.File;
 import java.util.List;
 
 public class ShoppingCartPage extends Page {
-    private YamlConfig config = YamlFileManager.getProjectConfigurations();
-    @FindBy(xpath = "//span[text()='My Account']")
-    public WebElement myAccountDropdown;
-    @FindBy(xpath = "//a[text()='Login']")
-    public WebElement loginLink;
 
-    @FindBy(xpath = "//input[@id='input-email']")
-    public WebElement emailInputField;
-
-    @FindBy(xpath = "//input[@id='input-password']")
-    public WebElement passwordInputField;
-
-    @FindBy(xpath = "//input[@value='Login']")
-    public WebElement loginButton;
 
     @FindBy(xpath = "//button[@id='button-cart']")
     public WebElement addTocCartButton;
 
     @FindBy(xpath = "//div[contains(text(),'Success')]")
     public WebElement successMessage;
+
+    @FindBy(xpath = "//div[contains(text(),'Text required!')]")
+    public WebElement errorMessage;
 
     @FindBy(xpath = "//a[@title='Shopping Cart']")
     public WebElement shoppingCartIcon;
@@ -78,48 +69,22 @@ public class ShoppingCartPage extends Page {
     @FindBy(xpath = "//input[@id='input-quantity']")
     public WebElement quantity;
 
-    @FindBy(xpath = "//button[@id='button-upload222']")
+    @FindBy(xpath = "//input[@id='input-option222']")
     public WebElement uploadFileButton;
 
+    @FindBy(xpath = "//div[@id='cart']")
+    public WebElement shoppingCartButton1;
+
+    @FindBy(xpath = "//span[@id='cart-total']")
+    public WebElement cartTotal;
+
+    @FindBy(xpath = "//button[@title='Remove']")
+    public List<WebElement> removeAllItemsFromCart;
 
     public ShoppingCartPage(WebDriverLib driver) {
         super(driver);
         PageFactory.initElements(driver, this);
     }
-
-    public void clickOnAddAccountButton() {
-        driver.waitForElementPresent(myAccountDropdown);
-        myAccountDropdown.click();
-    }
-
-    public void clickOnLoginLink() {
-        driver.waitForElementPresent(loginLink);
-        loginLink.click();
-    }
-
-    public void clickOnLoginButton() {
-        driver.waitForElementPresent(loginButton);
-        loginButton.click();
-    }
-
-    public void setEmail(String email) {
-        driver.waitForElementPresent(emailInputField);
-        emailInputField.sendKeys(email);
-    }
-
-    public void setPassword(String password) {
-        driver.waitForElementPresent(passwordInputField);
-        passwordInputField.sendKeys(password);
-    }
-
-    public void performLogin(String email) {
-        clickOnAddAccountButton();
-        clickOnLoginLink();
-        setEmail(email);
-        setPassword(config.getConfiguration("credentials.password") + "");
-        clickOnLoginButton();
-    }
-
 
     public void clickAddToCart() {
         driver.waitForElementPresent(addTocCartButton);
@@ -129,6 +94,14 @@ public class ShoppingCartPage extends Page {
     public boolean checkIfTheProductIsAddedToCart() {
         driver.waitForElementPresent(successMessage);
         if (successMessage.isDisplayed())
+            return true;
+        else
+            return false;
+    }
+
+    public boolean checkIfTheErrorMessageIsDisplayed(){
+        driver.waitForElementPresent(errorMessage);
+        if(errorMessage.isDisplayed())
             return true;
         else
             return false;
@@ -185,16 +158,18 @@ public class ShoppingCartPage extends Page {
     }
 
     public void selectRadioButton(String value) {
+        //sizeRadio.get(0).click();
         for (int i = 0; i < sizeRadio.size(); i++) {
-            if (sizeRadio.get(i).getAttribute("value") == value) {
+            if (sizeRadio.get(i).getAttribute("value").equals(value)) {
                 sizeRadio.get(i).click();
             }
         }
     }
 
     public void selectCheckBox(String value) {
+       // checkBox.get(0).click();
         for (int i = 0; i < checkBox.size(); i++) {
-            if (checkBox.get(i).getAttribute("value") == value) {
+            if (checkBox.get(i).getAttribute("value").equals(value)) {
                 checkBox.get(i).click();
             }
         }
@@ -210,6 +185,10 @@ public class ShoppingCartPage extends Page {
         textBox.sendKeys(value);
     }
 
+    public void clearTextBox() {
+        textBox.clear();
+    }
+
     public void Textarea(String value) {
         textArea.sendKeys(value);
     }
@@ -217,6 +196,7 @@ public class ShoppingCartPage extends Page {
     public void dateSelector(String value) {
         datePicker.sendKeys(value);
     }
+
     public void timeSelector(String value) {
         timePicker.sendKeys(value);
     }
@@ -226,12 +206,30 @@ public class ShoppingCartPage extends Page {
     }
 
     public void setQuantity(String value) {
+        quantity.clear();
         quantity.sendKeys(value);
     }
 
     public void uploadFile() {
-        uploadFileButton.sendKeys("src/test/resources/SamplePictures/picture.png");
-        //Alert alert = new Alert();
-//        driver.switchTo().alert().accept();
+        driver.uploadFileUsingJavaScript(uploadFileButton);
+    }
+
+    public boolean isAddToCartButton1Displayed() {
+        return shoppingCartButton1.isDisplayed();
+    }
+
+    public boolean isShoppingCartButtonDisplayed() {
+        return shoppingCartIcon.isDisplayed();
+
+    }
+
+    public void clickCartTotal() {
+        cartTotal.click();
+    }
+
+    public void removeAllItemsFromCart() {
+        for(int i = 0; i < removeAllItemsFromCart.size(); i++) {
+            removeAllItemsFromCart.get(i).click();
+        }
     }
 }

@@ -1,7 +1,6 @@
 package stepDefinitions;
 
 import cucumber.api.DataTable;
-import cucumber.api.PendingException;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
@@ -24,8 +23,9 @@ public class ShoppingCartStepDefinitions extends GeneralSteps{
     @Given("^Login with Registered user \"([^\"]*)\"$")
     public void loginWithRegisteredUser(String email) {
         driver.openWebPage("");
-        shoppingCartPage.performLogin("viki.vconnect@gmail.com");
+        loginPage.performLogin("viki.vconnect@gmail.com");
     }
+
 
     @Then("^Choose the product \"([^\"]*)\" from the category \"([^\"]*)\" SubCategory \"([^\"]*)\"$")
     public void chooseTheProductFromTheCategorySubCategory(String product, String category, String subcategory) throws Throwable {
@@ -62,6 +62,7 @@ public class ShoppingCartStepDefinitions extends GeneralSteps{
     @Then("^Enter all the required fields on the product page$")
     public void enterAllTheRequiredFieldsOnTheProductPage(DataTable table) {
         List<Map<String, String>> data = table.asMaps(String.class, String.class);
+        shoppingCartPage.uploadFile();
         shoppingCartPage.selectRadioButton(data.get(0).get("Radio"));
         shoppingCartPage.selectCheckBox(data.get(0).get("Checkbox"));
         shoppingCartPage.enterText(data.get(0).get("Text"));
@@ -72,5 +73,47 @@ public class ShoppingCartStepDefinitions extends GeneralSteps{
         shoppingCartPage.dateTimeSelector(data.get(0).get("DateTime"));
         shoppingCartPage.setQuantity(data.get(0).get("Quantity"));
 
+    }
+
+
+
+    @Then("^Choose the product \"([^\"]*)\" from the category \"([^\"]*)\" and subcategory \"([^\"]*)\"$")
+    public void chooseTheProductFromTheCategory(String product, String category, String SubCategory) {
+        shoppingCartPage.chooseCategory(category);
+        shoppingCartPage.clickSubCategory(SubCategory);
+        shoppingCartPage.clickProduct(product);
+
+
+    }
+
+    @And("^Check if the Shopping Cart button is displayed at Top Menu and other from right top menu$")
+    public void checkIfTheShoppingCartButtonIsDisplayedAtTopMenuAndOtherFromRightTopMenu() {
+        shoppingCartPage.isAddToCartButton1Displayed();
+        shoppingCartPage.isShoppingCartButtonDisplayed();
+    }
+
+    @Then("^Repeat step three without uploading the File in productpage$")
+    public void repeatStepWithoutUploadingTheFileInProductpage(DataTable table) {
+
+            List<Map<String, String>> data = table.asMaps(String.class, String.class);
+            shoppingCartPage.selectRadioButton(data.get(0).get("Radio"));
+            shoppingCartPage.selectCheckBox(data.get(0).get("Checkbox"));
+            shoppingCartPage.clearTextBox();
+            shoppingCartPage.selectColor(data.get(0).get("Select"));
+            shoppingCartPage.Textarea(data.get(0).get("Textarea"));
+            shoppingCartPage.dateSelector(data.get(0).get("Date"));
+            shoppingCartPage.timeSelector(data.get(0).get("Time"));
+            shoppingCartPage.dateTimeSelector(data.get(0).get("DateTime"));
+            shoppingCartPage.setQuantity(data.get(0).get("Quantity"));
+    }
+    @Then("^check if the error message is displayed$")
+    public void checkIfTheErrorMessageIsDisplayed() {
+        assertTrue(shoppingCartPage.checkIfTheErrorMessageIsDisplayed());
+    }
+
+    @Then("^Clear all products from cart$")
+    public void clearAllProductsFromCart() {
+        shoppingCartPage.clickCartTotal();
+        shoppingCartPage.removeAllItemsFromCart();
     }
 }

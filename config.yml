@@ -6,4 +6,4 @@ projectConfigurations:
   credentials:
     password: Shivani@100
   reporting:
-    reportConfigPath: /Users/vigneshram/Documents/TestAutomationAccenture/Team-2/target/classes/core/config/extent-config.xml
+    reportConfigPath: target/classes/core/config/extent-config.xml

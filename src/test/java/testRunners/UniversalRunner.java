@@ -14,7 +14,7 @@ import java.io.File;
 @RunWith(Cucumber.class)
 @CucumberOptions(
         // Here some tags can be set, for example, tags = {"@Example", "~@ignore"},
-        tags = {"@smokeTest"},
+        tags = {"@Team2"},
     //    plugin = {"html:target/cucumber", "json:target/cucumber.json"},
         plugin = { "com.cucumber.listener.ExtentCucumberFormatter:target/cucumber/index.html"},
         features = {"src/test/resources/features/shoppingcart_v.feature"},
