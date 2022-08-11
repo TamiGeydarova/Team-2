@@ -7,7 +7,7 @@ import org.openqa.selenium.support.How;
 
 public class MyWishListPage {
 
-    @FindBy(how = How.XPATH, using = "//*[@id=\"wishlist-total\"]//*[@class=\"hidden-xs hidden-sm hidden-md\"]")
+    @FindBy(how = How.XPATH, using = "//a[@data-original-title='Remove']")
     private WebElement removeButton;
 
 

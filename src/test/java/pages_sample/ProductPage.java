@@ -21,8 +21,13 @@ public class ProductPage {
         wishListButtonOnProduct.click();
     }
 
-    public void checkWishListSuccessMessageOnProduct() {
+    public void successMessageSamsungOnProduct() {
         String successMessageTextOnProduct = "Success: You have added Samsung Galaxy Tab 10.1 to your wish list!\n" +
+                "×";
+        assertEquals(successMessageTextOnProduct, addWishListAlertMessageOnProduct.getText());
+    }
+    public void successMessageIphoneOnProduct() {
+        String successMessageTextOnProduct = "Success: You have added iPhone to your wish list!\n" +
                 "×";
         assertEquals(successMessageTextOnProduct, addWishListAlertMessageOnProduct.getText());
     }

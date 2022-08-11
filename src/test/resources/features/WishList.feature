@@ -6,6 +6,7 @@ Feature: Wish List Tests
       | email    | gizem@gizem.com |
       | password | 1234            |
     Then I assert Wish List count is "Wish List (0)"
+    Then i close to driver
 
 
   Scenario: From Products List page there should be a link "Add to Wish List" with heart icon which add item to the Wish List
@@ -15,11 +16,13 @@ Feature: Wish List Tests
       | password | 1234             |
     Then I assert Wish List count is "Wish List (0)"
     Then I click to "Tablets" category
-    Then I click to Add to Wish List heart icon on product list page
-    Then I check success message
+    Then I click to Add to Wish List heart icon on "product list" page
+    Then I check "Samsung Galaxy Tab" should be in success message
     Then I assert Wish List count is "Wish List (1)"
     Then I click to my Wish List
     Then I remove my Wish List
+    Then i close to driver
+
 
 
   Scenario:From Product page there should be a link "Add to Wish List" with heart icon to add item to the Wish list
@@ -29,19 +32,25 @@ Feature: Wish List Tests
       | password | 1234            |
     Then I assert Wish List count is "Wish List (0)"
     Then I click to "Tablets" category
-    Then I click to "Tablets" product
-    Then I click to Add to Wish List heart icon on product  page
-    Then I should see success message
+    Then I click to "Samsung" product
+    Then I click to Add to Wish List heart icon on "product" page
+    Then I check "Samsung Galaxy Tab" should be in success message
     Then I assert Wish List count is "Wish List (1)"
     Then I click to my Wish List
     Then I remove my Wish List
+    Then i close to driver
+
+
 
   Scenario: Without user registered
     Given I am on homepage without registered
-    Then I click to "Cameras" category
-    Then I click to "Canon" product
-    Then I click to Add to Wish List heart icon on product  page
+    Then I click to "Phones & PDAs" category
+    Then I click to "iPhone" product
+    Then I click to Add to Wish List heart icon on "product" page
+    Then I check "iPhone" should be in success message
     Then I click to my Wish List
+    Then I assert that page title is "Account Login"
+    Then i close to driver
 
 
 
@@ -52,13 +61,14 @@ Feature: Wish List Tests
       | password | 1234            |
     Then I assert Wish List count is "Wish List (0)"
     Then I click to "Tablets" category
-    Then I click to product
-    Then I click to Add to Wish List heart icon on product  page
-    Then I click to Add to Wish List heart icon on product  page
-    Then I should see success message
+    Then I click to "Samsung" product
+    Then I click to Add to Wish List heart icon on "product" page
+    Then I click to Add to Wish List heart icon on "product" page
+    Then I check "Samsung Galaxy Tab" should be in success message
     Then I assert Wish List count is "Wish List (1)"
     Then I click to my Wish List
     Then I remove my Wish List
+    Then i close to driver
 
   Scenario:click Wish List on different product
     Given I am on login page
@@ -67,20 +77,16 @@ Feature: Wish List Tests
       | password | 1234            |
     Then I assert Wish List count is "Wish List (0)"
     Then I click to "Tablets" category
-    Then I click to Add to Wish List heart icon on product list page
-    Then I click to "Cameras" category
-    Then I click to Add to Wish List heart icon on product list page
-    Then I click to "PhonesPDA" category
-    Then I click to Add to Wish List heart icon on product list page
-
-
-
-
-
-
-
-
-
-
-
+    Then I click to "Samsung" product
+    Then I click to Add to Wish List heart icon on "product" page
+    Then I check "Samsung Galaxy Tab" should be in success message
+    Then I assert Wish List count is "Wish List (1)"
+    Then I click to "Phones & PDAs" category
+    Then I click to "iPhone" product
+    Then I click to Add to Wish List heart icon on "product" page
+    Then I check "iPhone" should be in success message
+    Then I assert Wish List count is "Wish List (2)"
+    Then I click to my Wish List
+    Then I remove my Wish List
+    Then i close to driver
 

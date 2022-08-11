@@ -1,12 +1,13 @@
 package stepDefinitions;
 
-import cucumber.api.PendingException;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
 import pages_sample.*;
+
+import static org.junit.Assert.assertEquals;
 
 import java.util.Map;
 import java.util.Objects;
@@ -56,40 +57,16 @@ public class WishListSteps {
     public void iClickToCategory(String categoryName) throws Throwable {
         if (Objects.equals(categoryName, "Tablets")) {
             homePage.selectTabletCategory();
-        } else if (Objects.equals(categoryName, "Cameras")) {
-            homePage.selectCamerasCategory();
-        } else if (Objects.equals(categoryName, "PhonesPDA")) {
+        } else if (Objects.equals(categoryName, "Phones & PDAs")) {
             homePage.selectPhonesPDACategory();
         }
-    }
-    @Then("^I click to Add to Wish List heart icon on product list page$")
-    public void iClickToAddToWishList() throws Throwable {
-        productListPage.clickAddWishListButton();
 
-    }
-
-    @Then("^I check success message$")
-    public void iCheckSuccessMessage() throws Throwable {
-        productListPage.checkWishListSuccessMessage();
-    }
-
-
-    @Then("^I should see success message$")
-    public void iShouldSeeSuccessMessage() throws Throwable {
-        productPage.checkWishListSuccessMessageOnProduct();
-
-    }
-
-    @Then("^I click to Add to Wish List heart icon on product  page$")
-    public void iClickToAddToWishListHeartIconOnProductPage() throws Throwable {
-        productPage.clickAddWishListButtonOnProduct();
     }
 
 
     @Then("^I click to my Wish List$")
     public void iClickToMyWishList() throws Throwable {
         homePage.iAmOnWistList();
-
     }
 
     @Then("^I remove my Wish List$")
@@ -100,7 +77,6 @@ public class WishListSteps {
 
     @Given("^I am on homepage without registered$")
     public void iAmOnHomepageWithoutRegistered() {
-
         driver.get(homePage.getHomePageUrl());
     }
 
@@ -111,11 +87,8 @@ public class WishListSteps {
 
     @Then("^I click to \"([^\"]*)\" product$")
     public void iClickToProduct(String clickToProduct) throws Throwable {
-
         if (Objects.equals(clickToProduct, "Samsung")) {
             productListPage.clickSamsungProduct();
-        } else if (Objects.equals(clickToProduct, "Canon")) {
-            productListPage.clickCanonProduct();
         } else if (Objects.equals(clickToProduct, "iPhone")) {
             productListPage.clickIphoneProduct();
         }
@@ -123,6 +96,39 @@ public class WishListSteps {
     }
 
 
+    @Then("^I should see \"([^\"]*)\" success message$")
+    public void iShouldSeeSuccessMessage(String successMessageOnProduct) throws Throwable {
 
+        if (Objects.equals(successMessageOnProduct, "Samsung")) {
+            productPage.successMessageSamsungOnProduct();
+        } else if (Objects.equals(successMessageOnProduct, "iPhone")) {
+            productPage.successMessageIphoneOnProduct();
+        }
+    }
+
+
+    @Then("^I check \"([^\"]*)\" should be in success message$")
+    public void iCheckShouldBeInSuccessMessage(String productName) throws Throwable {
+        productListPage.checkSuccessMessage(productName);
+    }
+
+    @Then("^I click to Add to Wish List heart icon on \"([^\"]*)\" page$")
+    public void iClickToAddToWishListHeartIconOnPage(String pageName) throws Throwable {
+        if (Objects.equals(pageName, "product list")) {
+            productListPage.clickAddWishListButton();
+        } else if (Objects.equals(pageName, "product")) {
+            productPage.clickAddWishListButtonOnProduct();
+        }
+    }
+
+    @Then("^I assert that page title is \"([^\"]*)\"$")
+    public void iAssertThatPageTitleIs(String pageTitle) throws Throwable {
+        assertEquals(driver.getTitle(), pageTitle);
+    }
+
+    @Then("^i close to driver$")
+    public void iCloseToDriver() {
+        driver.close();
+    }
 }
 

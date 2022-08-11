@@ -10,20 +10,15 @@ import static org.junit.Assert.assertEquals;
 public class HomePage {
 
 
-
     @FindBy(how = How.ID, using = "wishlist-total")
     private WebElement wishList;
 
     @FindBy(how = How.XPATH, using = "//a[contains(text(),'Tablets')]")
     private WebElement tabletsCategory;
 
-    @FindBy(how = How.XPATH, using = "//a[contains(text(),'Cameras')]")
-    private WebElement CamerasCategory;
 
     @FindBy(how = How.XPATH, using = "//a[contains(text(),'Phones & PDAs')]")
-    private WebElement PhonesPDACategory;
-
-
+    private WebElement phonesPDACategory;
 
 
     @FindBy(how = How.ID, using = "wishlist-total")
@@ -44,25 +39,18 @@ public class HomePage {
     }
 
     public void selectTabletCategory() {
-
         tabletsCategory.click();
     }
-    public void selectCamerasCategory() {
 
-        CamerasCategory.click();
-    }
 
     public void selectPhonesPDACategory() {
-        PhonesPDACategory.click();
+        phonesPDACategory.click();
     }
-
 
 
     public void iAmOnWistList() {
-
         onWistList.click();
     }
-
 
 
 }

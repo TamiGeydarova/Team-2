@@ -8,6 +8,7 @@ import org.openqa.selenium.support.ui.Select;
 import java.util.Objects;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 
 public class LoginPage {
@@ -42,7 +43,7 @@ public class LoginPage {
 
     public void checkLoginUrl() {
 
-        String pageUrl="http://www.demoshop24.com/index.php?route=account/login";
+        String pageUrl = "http://www.demoshop24.com/index.php?route=account/login";
 
         assertEquals(pageUrl, getPageUrl());
     }
