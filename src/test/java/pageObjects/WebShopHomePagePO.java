@@ -9,20 +9,34 @@ import org.openqa.selenium.support.PageFactory;
 
 public class WebShopHomePagePO extends Page {
 
-    @FindBy(how = How.XPATH, using = "//*[@id=\"menu\"]//div/a")
-    public WebElement seeAllDesktopsLink;
-
     @FindBy(how = How.XPATH, using = "//*[@id=\"menu\"]/div[2]/ul/li[1]/a")
     public WebElement desktopsMenuBtn;
 
+    @FindBy(how = How.XPATH, using = "//*[@id=\"menu\"]//div/a")
+    public WebElement seeAllDesktopsLink;
+
     @FindBy(how = How.XPATH, using = "//*[@class='button-group']/button[2]")
-    public WebElement desktopsFirstItemWishlistBtn;
+    public WebElement addFirstItemWishlistBtn;
+
+    @FindBy(how = How.XPATH, using = "//*[@id=\"menu\"]/div[2]/ul/li[7]/a")
+    public WebElement camerasMenuBtn;
+
+    @FindBy(how = How.XPATH, using = "//*[@id=\"menu\"]/div[2]/ul/li[2]/div/a")
+    public WebElement seeAllLaptopsLink;
+
+    @FindBy(how = How.XPATH, using = "//*[contains(@onclick, 'wishlist.add') and contains(@onclick, '30')]")
+    public WebElement addSecondItemWishlistBtn;
 
     @FindBy(how = How.XPATH, using = "//div[contains(text(),'Success')]")
     public WebElement successMsg;
 
     @FindBy(how = How.XPATH, using = "//*[contains(@id, 'wishlist-total') and contains(@title, 'Wish List')]")
     public WebElement wishlistPageLinkBtn;
+
+    @FindBy(how = How.XPATH, using = "//*[contains(@title, 'Shopping Cart')]")
+    public WebElement cartPageLinkBtn;
+
+//*[contains(@data-original-title, 'Add')]
 
     public WebShopHomePagePO(WebDriverLib driver) {
         super(driver);
@@ -42,7 +56,7 @@ public class WebShopHomePagePO extends Page {
     }
 
     public void addToWishlistDesktopsItem(){
-        desktopsFirstItemWishlistBtn.click();
+        addFirstItemWishlistBtn.click();
     }
 
     public void clickWishlistTotalLinkBtn(){

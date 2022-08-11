@@ -41,7 +41,7 @@ public class WebShopLoginPagePO extends Page{
         submitLoginBtn.click();
     }
 
-    public void enterExistingUserLogin() throws InterruptedException {
+    public void enterExistingUserLogin() {
         emailInputField.sendKeys("test@example.com");
         passwordInputField.sendKeys("password");
 

@@ -11,11 +11,18 @@ import java.util.List;
 
 public class WebShopWishlistPagePO extends Page {
 
-    @FindBy(how = How.XPATH, using = "//a[contains(text(),'Apple')]")
+    @FindBy(how = How.XPATH, using = "//*[contains(text(),'Apple Cinema')]")
     public WebElement appleCinemaItem;
+
+    @FindBy(how = How.XPATH, using = "//*[contains(text(),'Canon EOS')]")
+    public WebElement canonItem;
 
     @FindBy(how = How.CSS, using = "#content > div.table-responsive > table > tbody > tr > td:nth-child(6) > a")
     public WebElement removeFirstItemFromWishListBtn;
+
+    @FindBy(how = How.XPATH, using = "//*[@type='button' and @class='btn btn-primary']")
+    public WebElement moveToCartFirstItemFromWishListBtn;
+
 
     @FindBy(how = How.XPATH, using = "//*[@id=\"content\"]/h2")
     public List<WebElement> wishList;
@@ -26,9 +33,9 @@ public class WebShopWishlistPagePO extends Page {
         PageFactory.initElements(driver, this);
     }
 
-    public boolean checkWishlistIsEmpty() {
+    public boolean checkAppleCinemaItemIsRemoved() {
         try{
-            wishList.isEmpty();
+            appleCinemaItem.getText();
             return true;
         }catch (NoSuchElementException noSuchElementException){
             return false;

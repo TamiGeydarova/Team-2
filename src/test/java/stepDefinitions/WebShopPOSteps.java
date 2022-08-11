@@ -22,14 +22,14 @@ public class WebShopPOSteps extends GeneralSteps {
 
 
     @Given("^I am logged it to registered account$")
-    public void iAmLoggedIntoRegisteredAccount() throws InterruptedException {
+    public void iAmLoggedIntoRegisteredAccount() {
         driver.get(webShopLoginPagePO.getLoginPageUrl());
         webShopLoginPagePO.enterExistingUserLogin();
         webShopLoginPagePO.submitLoginBtn.click();
     }
 
     @And("^I navigate to homepage$")
-    public void iNavigateToHomePage() throws InterruptedException {
+    public void iNavigateToHomePage() {
         webShopHomePagePO.getHomePageUrl();
 
     }
@@ -41,13 +41,13 @@ public class WebShopPOSteps extends GeneralSteps {
         webShopHomePagePO.seeAllDesktopsLink.click();
     }
 
-    @When("^I add 1 product to wishlist$")
-    public void iAddDesktopsItemToWishlist() {
-        webShopHomePagePO.desktopsFirstItemWishlistBtn.click();
+    @When("^I add Apple Cinema product to wishlist$")
+    public void iAddAppleCinemaItemToWishlist() {
+        webShopHomePagePO.addFirstItemWishlistBtn.click();
     }
 
-    @And("^I see success message$")
-    public void iSeeSuccessMsg() {
+    @And("^I see success message for Apple Cinema$")
+    public void iSeeSuccessMsgAppleCinema() {
         assertTrue(webShopHomePagePO.successMsg.isDisplayed());
         assertEquals("Success: You have added Apple Cinema 30\" to your wish list!\n×", webShopHomePagePO.successMsg.getText());
     }
@@ -59,20 +59,20 @@ public class WebShopPOSteps extends GeneralSteps {
 
     }
 
-    @Then("^I see previously selected product in wishlist$")
-    public void iSeeSelectedProductInWishlist() {
+    @Then("^I see previously selected Apple Cinema product in wishlist$")
+    public void iSeeAppleCinemaProductInWishlist() {
         assertTrue(webShopWishlistPagePO.appleCinemaItem.isDisplayed());
     }
 
 
-    @Then("^I click remove item from wishlist$")
-    public void iClickRemoveItemWishlist() {
+    @Then("^I click remove Apple Cinema from wishlist$")
+    public void iClickRemoveAppleCinemaWishlist() {
         webShopWishlistPagePO.removeFirstItemFromWishListBtn.click();
     }
 
-    @And("^Item is removed from wishlist$")
-    public void firstItemRemovedFromWishlist() {
-        assertTrue(webShopWishlistPagePO.checkWishlistIsEmpty());
+    @And("^Apple Cinema is removed from wishlist$")
+    public void iRemoveAppleCinemaFromWishlist() {
+        assertFalse(webShopWishlistPagePO.checkAppleCinemaItemIsRemoved());
     }
 
     @And("^I see remove success message$")
@@ -82,8 +82,41 @@ public class WebShopPOSteps extends GeneralSteps {
                 "×", webShopHomePagePO.successMsg.getText());
     }
 
+    @And("^I click move to cart button$")
+    public void iClickMoveToCartFromWishlist() {
+        webShopWishlistPagePO.moveToCartFirstItemFromWishListBtn.click();
+    }
+
+    @And("^I navigate to shopping cart$")
+    public void iNavigateToCartPage() {
+        webShopHomePagePO.cartPageLinkBtn.click();
+    }
 
 
+    @And("^I click Cameras menu$")
+    public void iClickCamerasMenu() {
+        webShopHomePagePO.camerasMenuBtn.click();
+    }
 
+    @When("^I add Canon EOS product to wishlist$")
+    public void iAddCanonItemToWishlist() {
+        webShopHomePagePO.addSecondItemWishlistBtn.click();
+    }
 
+    @Then("^I see previously selected Canon EOS in wishlist$")
+    public void iSeeCanonInWishlist() {
+        assertTrue(webShopWishlistPagePO.canonItem.isDisplayed());
+
+    }
+
+    @Then("^I see previously selected Canon EOS in cart$")
+    public void iSeeMacBookInCart() {
+        assertTrue(webShopWishlistPagePO.canonItem.isDisplayed());
+    }
+
+    @And("^I see success message for Canon EOS$")
+    public void iSeeSuccessMsg() {
+        assertTrue(webShopHomePagePO.successMsg.isDisplayed());
+        assertEquals("Success: You have added Canon EOS 5D to your wish list!\n×", webShopHomePagePO.successMsg.getText());
+    }
 }
