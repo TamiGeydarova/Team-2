@@ -1,6 +1,7 @@
 package pageObjects;
 
 import flowWorkers.WebDriverLib;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
@@ -24,14 +25,16 @@ public class WebShopWishlistPagePO extends Page {
         super(driver);
         PageFactory.initElements(driver, this);
     }
+
     public boolean checkWishlistIsEmpty() {
-        if(wishList.isEmpty())
-            return false;
-        else
+        try{
+            wishList.isEmpty();
             return true;
+        }catch (NoSuchElementException noSuchElementException){
+            return false;
+        }
+
     }
-
-
 
 
 }
