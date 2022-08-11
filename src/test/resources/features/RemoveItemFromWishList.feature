@@ -1,8 +1,8 @@
+@Team2
 Feature: User adds 1 item to the wishlist and removes it after
 
-
   Scenario: User adds 1 item to wishlist and removes it
-    When I am logged it to registered account
+    Given I am logged it to registered account
     And I navigate to homepage
     And I click See all Desktops
     When I add Apple Cinema product to wishlist

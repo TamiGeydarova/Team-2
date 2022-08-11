@@ -53,8 +53,9 @@ public class WebShopPOSteps extends GeneralSteps {
     }
 
     @And("^I open wishlist page$")
-    public void iOpenWishlistPage() {
+    public void iOpenWishlistPage() throws InterruptedException {
         webShopHomePagePO.wishlistPageLinkBtn.click();
+        Thread.sleep(1000);
         assertEquals("http://www.demoshop24.com/index.php?route=account/wishlist",driver.getCurrentUrl());
 
     }
@@ -62,6 +63,7 @@ public class WebShopPOSteps extends GeneralSteps {
     @Then("^I see previously selected Apple Cinema product in wishlist$")
     public void iSeeAppleCinemaProductInWishlist() {
         assertTrue(webShopWishlistPagePO.appleCinemaItem.isDisplayed());
+        webShopWishlistPagePO.removeFirstItemFromWishListBtn.click();
     }
 
 
@@ -83,9 +85,11 @@ public class WebShopPOSteps extends GeneralSteps {
     }
 
     @And("^I click move to cart button$")
-    public void iClickMoveToCartFromWishlist() {
+    public void iClickMoveToCartFromWishlist() throws InterruptedException {
         webShopWishlistPagePO.moveToCartFirstItemFromWishListBtn.click();
-    }
+        Thread.sleep(1000);
+        webShopWishlistPagePO.removeFirstItemFromWishListBtn.click();
+              }
 
     @And("^I navigate to shopping cart$")
     public void iNavigateToCartPage() {
@@ -104,14 +108,17 @@ public class WebShopPOSteps extends GeneralSteps {
     }
 
     @Then("^I see previously selected Canon EOS in wishlist$")
-    public void iSeeCanonInWishlist() {
+    public void iSeeCanonInWishlist() throws InterruptedException {
         assertTrue(webShopWishlistPagePO.canonItem.isDisplayed());
+        Thread.sleep(1000);
+        webShopWishlistPagePO.removeFirstItemFromWishListBtn.click();
 
     }
 
     @Then("^I see previously selected Canon EOS in cart$")
     public void iSeeMacBookInCart() {
         assertTrue(webShopWishlistPagePO.canonItem.isDisplayed());
+
     }
 
     @And("^I see success message for Canon EOS$")
@@ -136,24 +143,34 @@ public class WebShopPOSteps extends GeneralSteps {
     }
 
     @And("^I see success message for Samsung Galaxy Tab$")
-    public void iSeeSuccessMsgSamsungTab() {
+    public void iSeeSuccessMsgSamsungTab() throws InterruptedException {
         assertTrue(webShopHomePagePO.successMsg.isDisplayed());
+        Thread.sleep(2000);
         assertEquals("Success: You have added Samsung Galaxy Tab 10.1 to your wish list!\n×", webShopHomePagePO.successMsg.getText());
     }
 
-    @Then("^I see out of stock message$")
-    public void iSeeOutOfStockMsg() {
+    @Then("^I see previously Galaxy Tab in wishlist$")
+    public void iSeeGalaxyTabInWishlist() {
+        assertTrue(webShopWishlistPagePO.samsungTabletItem.isDisplayed());
+    }
 
+    @Then("^I see out of stock message$")
+    public void iSeeOutOfStockMsg() throws InterruptedException {
+
+        Thread.sleep(2000);
         assertTrue(webShopHomePagePO.outOfStockMsg.isDisplayed());
+        assertEquals("rgba(169, 68, 66, 1)", webShopHomePagePO.outOfStockMsg.getCssValue("color"));
         assertEquals("Products marked with *** are not available in the desired quantity or not in stock!\n" +
                 "×", webShopHomePagePO.outOfStockMsg.getText());
     }
 
-    @And("^I see product is marked with 3 stars$")
+    @And("^I see product is marked with 3 red stars$")
     public void iSeeThreeStarsMarkForOutOfStock() {
         assertTrue(webShopHomePagePO.threeStarsMark.isEnabled());
         assertEquals("***", webShopHomePagePO.threeStarsMark.getText());
         assertEquals("rgba(169, 68, 66, 1)", webShopHomePagePO.threeStarsMark.getCssValue("color"));
+        webShopHomePagePO.removeFirstItemCartPageBtn.click();
+
     }
 
 

@@ -36,6 +36,10 @@ public class WebShopHomePagePO extends Page {
     @FindBy(how = How.XPATH, using = "//*[contains(@title, 'Shopping Cart')]")
     public WebElement cartPageLinkBtn;
 
+    @FindBy(how = How.XPATH, using = "//*[contains(@data-original-title, \"Remove\")]")
+    public WebElement removeFirstItemCartPageBtn;
+
+
     @FindBy(how = How.XPATH, using = "//*[contains(@id, 'menu')]//*[contains(text(),'Tablets')]")
     public WebElement tabletsMenuBtn;
 

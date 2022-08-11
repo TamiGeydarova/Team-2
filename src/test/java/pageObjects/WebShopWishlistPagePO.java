@@ -33,6 +33,7 @@ public class WebShopWishlistPagePO extends Page {
 
 
 
+
     public WebShopWishlistPagePO(WebDriverLib driver) {
         super(driver);
         PageFactory.initElements(driver, this);
