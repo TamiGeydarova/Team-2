@@ -17,6 +17,9 @@ public class WebShopWishlistPagePO extends Page {
     @FindBy(how = How.XPATH, using = "//*[contains(text(),'Canon EOS')]")
     public WebElement canonItem;
 
+    @FindBy(how = How.XPATH, using = "//*[@class='table-responsive']//*[contains(text(),'Samsung')]")
+    public WebElement samsungTabletItem;
+
     @FindBy(how = How.CSS, using = "#content > div.table-responsive > table > tbody > tr > td:nth-child(6) > a")
     public WebElement removeFirstItemFromWishListBtn;
 
@@ -26,6 +29,8 @@ public class WebShopWishlistPagePO extends Page {
 
     @FindBy(how = How.XPATH, using = "//*[@id=\"content\"]/h2")
     public List<WebElement> wishList;
+
+
 
 
     public WebShopWishlistPagePO(WebDriverLib driver) {

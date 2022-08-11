@@ -36,7 +36,20 @@ public class WebShopHomePagePO extends Page {
     @FindBy(how = How.XPATH, using = "//*[contains(@title, 'Shopping Cart')]")
     public WebElement cartPageLinkBtn;
 
-//*[contains(@data-original-title, 'Add')]
+    @FindBy(how = How.XPATH, using = "//*[contains(@id, 'menu')]//*[contains(text(),'Tablets')]")
+    public WebElement tabletsMenuBtn;
+
+    @FindBy(how = How.ID, using = "button-cart")
+    public WebElement pDpAddToCartBtn;
+
+    @FindBy(how = How.XPATH, using = "//div[contains(text(),'Products')]")
+    public WebElement outOfStockMsg;
+
+    @FindBy(how = How.XPATH, using = "//*[contains(@class, \"text-danger\")]")
+    public WebElement threeStarsMark;
+
+
+    //*[@id="checkout-cart"]/div[1]/i
 
     public WebShopHomePagePO(WebDriverLib driver) {
         super(driver);

@@ -115,8 +115,48 @@ public class WebShopPOSteps extends GeneralSteps {
     }
 
     @And("^I see success message for Canon EOS$")
-    public void iSeeSuccessMsg() {
+    public void iSeeSuccessMsgCanonEOS() {
         assertTrue(webShopHomePagePO.successMsg.isDisplayed());
         assertEquals("Success: You have added Canon EOS 5D to your wish list!\n×", webShopHomePagePO.successMsg.getText());
     }
+
+    @And("^I click Tablets menu$")
+    public void iClickTabletsMenu() {
+        webShopHomePagePO.tabletsMenuBtn.click();
+    }
+
+    @And("^I click add item to cart on PDP page$")
+    public void iClickAddToCartPDPpage() {
+        webShopHomePagePO.pDpAddToCartBtn.click();
+    }
+
+    @When("^I add Samsung Galaxy Tab product to wishlist$")
+    public void iAddSamsungTabToWishlist() {
+        webShopHomePagePO.addFirstItemWishlistBtn.click();
+    }
+
+    @And("^I see success message for Samsung Galaxy Tab$")
+    public void iSeeSuccessMsgSamsungTab() {
+        assertTrue(webShopHomePagePO.successMsg.isDisplayed());
+        assertEquals("Success: You have added Samsung Galaxy Tab 10.1 to your wish list!\n×", webShopHomePagePO.successMsg.getText());
+    }
+
+    @Then("^I see out of stock message$")
+    public void iSeeOutOfStockMsg() {
+
+        assertTrue(webShopHomePagePO.outOfStockMsg.isDisplayed());
+        assertEquals("Products marked with *** are not available in the desired quantity or not in stock!\n" +
+                "×", webShopHomePagePO.outOfStockMsg.getText());
+    }
+
+    @And("^I see product is marked with 3 stars$")
+    public void iSeeThreeStarsMarkForOutOfStock() {
+        assertTrue(webShopHomePagePO.threeStarsMark.isEnabled());
+        assertEquals("***", webShopHomePagePO.threeStarsMark.getText());
+        assertEquals("rgba(169, 68, 66, 1)", webShopHomePagePO.threeStarsMark.getCssValue("color"));
+    }
+
+
+
+
 }
