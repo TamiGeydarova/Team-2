@@ -15,8 +15,6 @@ public class ProductListPage {
 
     @FindBy(how = How.XPATH, using = "//img[@title='Samsung Galaxy Tab 10.1']")
     private WebElement clickSamsungProduct;
-    @FindBy(how = How.XPATH, using = "//img[@title='Canon EOS 5D']")
-    private WebElement clickCanonProduct;
     @FindBy(how = How.XPATH, using = "//img[@title='iPhone']")
     private WebElement clickIphoneProduct;
     @FindBy(how = How.XPATH, using = "//button[@data-original-title='Add to Wish List']")
@@ -28,14 +26,9 @@ public class ProductListPage {
         clickSamsungProduct.click();
     }
 
-    public void clickCanonProduct() {
-        clickCanonProduct.click();
-    }
-
     public void clickIphoneProduct() {
         clickIphoneProduct.click();
     }
-
 
     public void clickAddWishListButton() {
         wishListButton.click();

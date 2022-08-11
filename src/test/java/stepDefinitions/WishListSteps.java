@@ -80,11 +80,6 @@ public class WishListSteps {
         driver.get(homePage.getHomePageUrl());
     }
 
-    @Then("^I should direct login page$")
-    public void iShouldDirectLoginPage() {
-        loginPage.checkLoginUrl();
-    }
-
     @Then("^I click to \"([^\"]*)\" product$")
     public void iClickToProduct(String clickToProduct) throws Throwable {
         if (Objects.equals(clickToProduct, "Samsung")) {
@@ -94,18 +89,6 @@ public class WishListSteps {
         }
 
     }
-
-
-    @Then("^I should see \"([^\"]*)\" success message$")
-    public void iShouldSeeSuccessMessage(String successMessageOnProduct) throws Throwable {
-
-        if (Objects.equals(successMessageOnProduct, "Samsung")) {
-            productPage.successMessageSamsungOnProduct();
-        } else if (Objects.equals(successMessageOnProduct, "iPhone")) {
-            productPage.successMessageIphoneOnProduct();
-        }
-    }
-
 
     @Then("^I check \"([^\"]*)\" should be in success message$")
     public void iCheckShouldBeInSuccessMessage(String productName) throws Throwable {
