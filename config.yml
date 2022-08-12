@@ -2,3 +2,8 @@ projectConfigurations:
   browser:
     name: chrome
     baseUrl: https://www.google.com/
+    demoUrl: http://www.demoshop24.com/
+  credentials:
+    password: Shivani@100
+  reporting:
+    reportConfigPath: target/classes/core/config/extent-config.xml

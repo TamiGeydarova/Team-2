@@ -2,10 +2,7 @@ package flowWorkers;
 
 import core.config.YamlConfig;
 import core.config.YamlFileManager;
-import org.openqa.selenium.By;
-import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
@@ -13,6 +10,7 @@ import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.io.File;
 import java.util.List;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
@@ -24,20 +22,39 @@ public class WebDriverLib implements WebDriver {
     private String driverPath = System.getProperty("user.dir") + "/src/test/resources/drivers/";
     private YamlConfig config = YamlFileManager.getProjectConfigurations();
     private String browser = config.getConfiguration("browser.name");
-    private String baseURL = config.getConfiguration("browser.baseUrl");
+    private String baseURL = config.getConfiguration("browser.demoUrl");
+    private String OS = System.getProperty("os.name").toLowerCase();
+    private String chromeDriver;
+    private String firefoxDriver;
+    private String ieDriver;
 
     public void openBrowser() {
+
+        if(OS.contains("windows")) {
+            chromeDriver = "chromedriver.exe";
+            firefoxDriver = "geckodriver.exe";
+            ieDriver = "IEDriverServer.exe";
+        } else if(OS.contains("mac")) {
+            chromeDriver = "chromedriver";
+            firefoxDriver = "geckodriver";
+            ieDriver = "IEDriverServer";
+        } else if(OS.contains("linux")) {
+            chromeDriver = "chromedriver";
+            firefoxDriver = "geckodriver";
+            ieDriver = "IEDriverServer";
+        }
+
         switch (browser) {
             case "chrome":
-                System.setProperty("webdriver.chrome.driver", driverPath + "chromedriver");
+                System.setProperty("webdriver.chrome.driver", driverPath + chromeDriver);
                 driver = new ChromeDriver();
                 break;
             case "firefox":
-                System.setProperty("webdriver.gecko.driver", driverPath + "geckodriver.exe");
+                System.setProperty("webdriver.gecko.driver", driverPath + firefoxDriver);
                 driver = new FirefoxDriver();
                 break;
             case "ie":
-                System.setProperty("webdriver.ie.driver", driverPath + "IEDriverServer.exe");
+                System.setProperty("webdriver.ie.driver", driverPath + ieDriver);
                 driver = new InternetExplorerDriver();
                 break;
             default:
@@ -59,6 +76,11 @@ public class WebDriverLib implements WebDriver {
 
     public void waitForElementPresent(WebElement element) {
         wait.until(ExpectedConditions.visibilityOf(element));
+    }
+
+    public void clickUsingJavaScriptExecutor(WebElement element) {
+        JavascriptExecutor javascript = (JavascriptExecutor) driver;
+        javascript.executeScript("arguments[0].click();", element);
     }
 
     public void waitForTitleExist(String title) {
@@ -156,6 +178,14 @@ public class WebDriverLib implements WebDriver {
 
     public TargetLocator switchTo() {
         return driver.switchTo();
+    }
+
+    public void uploadFileUsingJavaScript(WebElement element) {
+        String filename = "src/test/resources/SamplePictures/picture.png";
+        File file = new File(filename);
+        String path = file.getAbsolutePath();
+        JavascriptExecutor jsx = (JavascriptExecutor) driver;
+        jsx.executeScript("document.getElementById('input-option222').value='" + path + "';");
     }
 
 }
