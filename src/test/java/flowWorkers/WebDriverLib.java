@@ -25,40 +25,19 @@ public class WebDriverLib implements WebDriver {
     private YamlConfig config = YamlFileManager.getProjectConfigurations();
     private String browser = config.getConfiguration("browser.name");
     private String baseURL = config.getConfiguration("browser.baseUrl");
-    private String OS = System.getProperty("os.name").toLowerCase();
-    private String chromeDriver;
-    private String firefoxDriver;
-    private String ieDriver;
+
     public void openBrowser() {
-        if (OS.contains("windows")) {
-            chromeDriver = "chromedriver.exe";
-            firefoxDriver = "geckodriver.exe";
-            ieDriver = "IEDriverServer.exe";
-        } else if (OS.contains("mac")) {
-            chromeDriver = "chromedriver";
-            firefoxDriver = "geckodriver";
-            ieDriver = "IEDriverServer";
-        } else if (OS.contains("linux")) {
-            chromeDriver = "chromedriver";
-            firefoxDriver = "geckodriver";
-            ieDriver = "IEDriverServer";
-        }
-
-
-
-
         switch (browser) {
             case "chrome":
-                System.setProperty("webdriver.chrome.driver", driverPath + chromeDriver);
+                System.setProperty("webdriver.chrome.driver", driverPath + "chromedriver");
                 driver = new ChromeDriver();
                 break;
             case "firefox":
-                System.setProperty("webdriver.gecko.driver", driverPath + firefoxDriver);
+                System.setProperty("webdriver.gecko.driver", driverPath + "geckodriver.exe");
                 driver = new FirefoxDriver();
                 break;
             case "ie":
-                System.setProperty("webdriver.ie.driver", driverPath + ieDriver +
-                        "");
+                System.setProperty("webdriver.ie.driver", driverPath + "IEDriverServer.exe");
                 driver = new InternetExplorerDriver();
                 break;
             default:
@@ -120,7 +99,7 @@ public class WebDriverLib implements WebDriver {
 
     public boolean isElementPresent(WebElement element) {
         try {
-            element.getTagName();
+            element.getClass();
             return true;
         } catch (NoSuchElementException nsee) {
             return false;
