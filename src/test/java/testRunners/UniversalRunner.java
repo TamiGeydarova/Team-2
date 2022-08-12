@@ -15,9 +15,8 @@ import java.io.File;
 @CucumberOptions(
         // Here some tags can be set, for example, tags = {"@Example", "~@ignore"},
         tags = {"@Team2"},
-    //    plugin = {"html:target/cucumber", "json:target/cucumber.json"},
-        plugin = { "com.cucumber.listener.ExtentCucumberFormatter:target/cucumber/index.html"},
-        features = {"src/test/resources/features/shoppingcart_v.feature"},
+        plugin = {"html:target/cucumber", "json:target/cucumber.json"},
+        features = {"src/test/resources/features/"},
         glue = {"stepDefinitions"}
 )
 

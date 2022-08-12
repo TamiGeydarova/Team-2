@@ -121,7 +121,7 @@ public class WebDriverLib implements WebDriver {
 
     public boolean isElementPresent(WebElement element) {
         try {
-            element.getTagName();
+            element.getClass();
             return true;
         } catch (NoSuchElementException nsee) {
             return false;
